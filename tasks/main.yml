@@ -1,2 +1,6 @@
 ---
 # tasks file for simple_role
+- include_tasks: prepare_filesystem.yml
+- include_tasks: selinux_configure.yml
+- include_tasks: install_and_configure_nginx.yml
+- include_tasks: configure_firewalld.yml

@@ -1,0 +1,16 @@
+- name: Update firewalld service
+  template:
+    src: site_service.xml
+    dest: /etc/firewalld/services/site_service.xml
+  notify:
+    - Firewalld reload
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: Configure firewall
+  firewalld:
+    service: site_service
+    immediate: yes
+    permanent: yes
+    state: enabled

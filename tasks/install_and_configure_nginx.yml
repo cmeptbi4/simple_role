@@ -1,0 +1,36 @@
+
+- name: Enable EPEL Repository
+  yum:
+    name: epel-release
+    state: present
+
+- name: Install Nginx
+  package:
+    name: nginx
+    state: latest
+  notify:
+    - NGINX Enable
+
+- name: Replace NGINX config
+  template:
+    src=templates/nginx.conf
+    dest=/etc/nginx/nginx.conf
+  notify:
+    - NGINX reload
+
+- name: Add NGINX virtualhost config
+  template:
+    src=templates/site.conf
+    dest=/etc/nginx/conf.d/site.conf
+  notify:
+    - NGINX reload
+
+- name: Make sure destination dir exists
+  file:
+    path: /var/www/site/html
+    state: directory
+
+- name: Add file or template to remote instance
+  template: 
+    src: index.html
+    dest: /var/www/site/html/index.html

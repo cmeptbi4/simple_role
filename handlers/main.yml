@@ -1,2 +1,15 @@
 ---
 # handlers file for simple_role
+- name: NGINX reload
+  service:
+    name=nginx
+    state=reloaded  
+    
+- name: NGINX Enable
+  systemd:
+    name: nginx
+    enabled: yes
+
+- name: Firewalld reload
+  command: firewall-cmd --reload
+

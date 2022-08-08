@@ -1,0 +1,40 @@
+- name: create partition
+  parted:
+    device: /dev/sdb
+    number: 1
+    flags: [ lvm ]
+    state: present
+
+- name: Install lvm2 dependency
+  package:
+    name: lvm2
+    state: present
+
+- name: Creating volume group
+  lvg:
+      vg: vg1
+      pvs: /dev/sdb1
+
+- name: Creating logical volume
+  lvol:
+      vg: vg1
+      lv:  lv1
+      size: 100%VG
+
+- name: Create directory data1 if does not exist
+  file:
+    path: /srv
+    state: directory
+    mode: '0755'
+
+- name: format the xfs filesystem
+  filesystem:
+    fstype: xfs
+    dev: /dev/vg1/lv1
+
+- name: mount the lv on /data1
+  mount:
+    path: /srv
+    src: /dev/vg1/lv1
+    fstype: xfs
+    state: mounted

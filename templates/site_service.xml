@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>site_service</short>
+  <description>simple_rule service for firewalld</description>
+  <port port="{{ listen_port }}" protocol="tcp"/>
+  <module name="nf_conntrack_netbios_ns"/>
+</service>
