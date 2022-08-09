@@ -21,7 +21,7 @@
       lv:  lv1
       size: 100%VG
 
-- name: Create directory data1 if does not exist
+- name: Create directory srv if does not exist
   file:
     path: /srv
     state: directory
@@ -32,7 +32,7 @@
     fstype: xfs
     dev: /dev/vg1/lv1
 
-- name: mount the lv on /data1
+- name: mount the lv on /srv
   mount:
     path: /srv
     src: /dev/vg1/lv1

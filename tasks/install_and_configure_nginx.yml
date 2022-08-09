@@ -30,7 +30,7 @@
     path: /var/www/site/html
     state: directory
 
-- name: Add file or template to remote instance
+- name: Add site content
   template: 
     src: index.html
     dest: /var/www/site/html/index.html
